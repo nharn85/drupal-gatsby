@@ -11,7 +11,7 @@
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators
   if (node.internal.type === `node__mandala`) {
-    const slug = `/mandala/${node.field_mandala_id}/`
+    const slug = `/mandala/pdfs/${node.field_mandala_id}`
     createNodeField({
       node,
       name: `slug`,
