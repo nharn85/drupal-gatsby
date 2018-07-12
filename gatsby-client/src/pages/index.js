@@ -1,18 +1,18 @@
 import React from 'react'
 import Link from 'gatsby-link'
+import Img from "gatsby-image"
 
 const IndexPage = ({data}) => (
 <div>
       <h1>Mandalas</h1>
       <div>
-      {data.allNodeMandala.site.siteMetadata.baseUrl}
         {data.allNodeMandala.edges.map(({ node }) => (
           <article key={node.id}>
             <strong>{node.title}</strong>
+            <div>{node.field_mandala_id}</div>
             {/* {node.relationships.field_download_file.url} */}
             {/* {node.relationships.field_mandala_image.url} */}
-            
-            <img src={node.relationships.field_mandala_thumbnail_image.url} alt={node.title}/>
+            <Img title={node.title} alt={node.title} sizes={node.relationships.field_mandala_thumbnail_image.localFile.childImageSharp.sizes} />
           </article>
         ))}
         <hr/>
@@ -24,30 +24,27 @@ export default IndexPage
 
 export const query = graphql`
 query allNodeMandala {
-  site {
-    siteMetadata {
-      baseUrl
-    }
-  }
   allNodeMandala {
     edges {
       node {
-        id
+      	id
         title
+        fields {
+          slug
+        }
         relationships {
-          field_download_file {
-            url
-          }
-          field_mandala_image {
-            url
-          }
-          
           field_mandala_thumbnail_image {
-            url
+            localFile {
+              childImageSharp {
+                sizes(maxWidth: 300) {
+                  ...GatsbyImageSharpSizes
+                }
+              }
+            }
           }
         }
       }
     }
   }
-  }
+}
 `

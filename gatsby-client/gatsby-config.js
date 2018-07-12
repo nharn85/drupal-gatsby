@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Drupal Recipes',
+    title: 'Nicole Dawn Design',
     baseUrl: 'http://nicoledawn.design/',
   },
   plugins: [
@@ -10,6 +10,15 @@ module.exports = {
       options: {
         baseUrl: 'http://nicoledawn.design/',
         apiBase: 'jsonapi', // endpoint of Drupal server
+      },
+    },
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'pages',
+        path: './src/pages/',
       },
     },
   ],
