@@ -13,6 +13,8 @@ const IndexPage = ({data}) => (
             {/* {node.relationships.field_download_file.url} */}
             {/* {node.relationships.field_mandala_image.url} */}
             <Img title={node.title} alt={node.title} sizes={node.relationships.field_mandala_thumbnail_image.localFile.childImageSharp.sizes} />
+
+            {node.relationships.field_download_file.url}
           </article>
         ))}
         <hr/>
@@ -33,6 +35,9 @@ query allNodeMandala {
           slug
         }
         relationships {
+          field_download_file {
+            url
+          }
           field_mandala_thumbnail_image {
             localFile {
               childImageSharp {
