@@ -30,6 +30,7 @@ exports.downloadMediaFiles = ({ nodes, store, cache, createNode, _auth }) => {
     if (node.__type === 'mandala') {
       try {
         fileNode = await createRemoteFileNode({
+          id: node.field_mandala_id,
           url: node.url,
           store,
           cache,
@@ -48,3 +49,33 @@ exports.downloadMediaFiles = ({ nodes, store, cache, createNode, _auth }) => {
     }
   });
 };
+
+// exports.createPages = ({ graphql, boundActionCreators }) => {
+//   const { createPage } = boundActionCreators;
+//   return new Promise((resolve, reject) => {
+//     graphql(`
+//       {
+//         allMarkdownRemark {
+//           edges {
+//             node {
+//               fields {
+//                 slug
+//               }
+//             }
+//           }
+//         }
+//       }
+//     `).then(result => {
+//       result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+//         createPage({
+//           path: node.fields.slug,
+//           component: path.resolve("./src/posts/PostPage.js"),
+//           context: {
+//             slug: node.fields.slug
+//           }
+//         });
+//       });
+//       resolve();
+//     });
+//   });
+// };

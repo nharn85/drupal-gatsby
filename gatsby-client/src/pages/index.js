@@ -10,11 +10,14 @@ const IndexPage = ({data}) => (
           <article key={node.id}>
             <strong>{node.title}</strong>
             <div>{node.field_mandala_id}</div>
-            {/* {node.relationships.field_download_file.url} */}
-            {/* {node.relationships.field_mandala_image.url} */}
-            <Img title={node.title} alt={node.title} sizes={node.relationships.field_mandala_thumbnail_image.localFile.childImageSharp.sizes} />
+            <Img sizes={node.relationships.field_mandala_thumbnail_image.localFile.childImageSharp.sizes} />
 
-            {node.relationships.field_download_file.url}
+
+            {node.fields.slug}
+            
+            {/* <Img sizes={node.relationships.field_mandala_image.localFile.childImageSharp.sizes.src} /> */}
+
+            <a href={node.relationships.field_download_file.localFile.publicURL} target="_blank">Download</a>
           </article>
         ))}
         <hr/>
@@ -29,20 +32,33 @@ query allNodeMandala {
   allNodeMandala {
     edges {
       node {
-      	id
+        id
         title
+        field_mandala_id
         fields {
           slug
         }
         relationships {
-          field_download_file {
-            url
-          }
           field_mandala_thumbnail_image {
             localFile {
               childImageSharp {
-                sizes(maxWidth: 300) {
+                sizes {
                   ...GatsbyImageSharpSizes
+                }
+              }
+            }
+          }
+          field_download_file {
+            localFile {
+              id
+              publicURL
+            }
+          }
+          field_mandala_image {
+            localFile {
+              childImageSharp {
+                sizes {
+                  src
                 }
               }
             }

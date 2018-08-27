@@ -1,10 +1,11 @@
 module.exports = {
   siteMetadata: {
     title: 'Nicole Dawn Design',
-    baseUrl: 'http://nicoledawn.design/',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-source-drupal',
       options: {
@@ -12,13 +13,10 @@ module.exports = {
         apiBase: 'jsonapi', // endpoint of Drupal server
       },
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-remark',
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: `gatsby-source-filesystem`,
       options: {
-        name: 'pages',
+        name: `pages`,
         path: `${__dirname}/src/pages/`,
       },
     },
@@ -26,16 +24,16 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `data`,
-        path: `${__dirname}/src/pages/`,
+        path: `${__dirname}/src/data/`,
       },
     },
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `rocksalt`,
-          `raleway\:400`,
-          `pacifico`
+          `Rock+Salt`,
+          `Pacifico`,
+          `Raleway\:400`
         ]
       }
     }
