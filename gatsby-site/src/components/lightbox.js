@@ -4,42 +4,19 @@ import {
     PopupboxContainer
 } from 'react-popupbox';
 
-export class Lightbox extends Component {
-    openPopupbox() {
-        const content = (
-            <div>
-                <span>Open popupbox</span>
-                <button onClick={this.updatePopupbox}>Update!</button>
-            </div>
-        )
+import '../../node_modules/react-popupbox/dist/react-popupbox.css'
 
+class Lightbox extends Component {
+    openPopupbox() {
+        const content = <img src="static/3f129d517fda967300ce70a9247d9ea5-cef36ca6663a6add9fd14ac4f4034324-75b7a.png" />
         PopupboxManager.open({
             content,
             config: {
-                titleBar: {
-                    enable: true,
-                    text: 'Step 1'
-                },
                 fadeIn: true,
-                fadeInSpeed: 500
-            }
-        })
-    }
-
-    updatePopupbox() {
-        const content = (
-            <div>
-                <span>Update popupbox with new content and config</span>
-                <button onClick={PopupboxManager.close}>Close</button>
-            </div>
-        )
-
-        PopupboxManager.update({
-            content,
-            config: {
-                titleBar: {
-                    text: 'Updated!'
-                }
+                fadeOut: true,
+                fadeInSpeed: 500,
+                overlayClose: true,
+                escClose: true,
             }
         })
     }

@@ -1,13 +1,68 @@
 import React from 'react'
 import Link from 'gatsby-link'
+import Img from "gatsby-image"
 
-const IndexPage = () => (
-  <div>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
+import Lightbox from '../components/lightbox'
+
+import './mandalas.css'
+
+const IndexPage = ({ data }) => (
+  <div className="page-wrapper">
+
+    <Lightbox />
+
+    <div className="grid-wrapper">
+      {data.allNodeMandala.edges.map(({ node }) => (
+        <article className="mandala grid-item" key={node.id}>
+          <a href="#">
+            <Img
+              title={node.title}
+              alt={node.title}
+              className="mandala-thumb"
+              resolutions={node.relationships.field_mandala_thumbnail_image.localFile.childImageSharp.resolutions}
+            />
+          </a>
+          <div className="title">{node.title}</div>
+          <a className="link" href={node.relationships.field_download_file.localFile.publicURL} target="_blank">Download</a>
+        </article>
+      ))}
+    </div>
   </div>
 )
 
 export default IndexPage
+
+export const query = graphql`
+  query query {
+    allNodeMandala {
+      edges {
+        node {
+          id
+          title
+          relationships {
+            field_download_file {
+              localFile {
+                publicURL
+              }
+            }
+            field_mandala_image {
+              localFile {
+                publicURL
+              }
+            }
+            field_mandala_thumbnail_image {
+              localFile {
+                publicURL
+                childImageSharp {
+                  resolutions(width: 250, height: 250) {
+                    ...GatsbyImageSharpResolutions
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`

@@ -23,6 +23,7 @@
 }
 
 .mandala .title {
+    color: #635470;
     display: inline-block;
     font-family: 'Rock Salt',cursive;
     font-size: 18px;
@@ -50,10 +51,6 @@
     transition: background .25s,color .25s,ease;
     width: 100%;
 }
-  
-.lightbox {
-    /* display: none; */
-}
 
 .mandala-thumb {
     max-width: 250px;
@@ -64,3 +61,11 @@
     padding: 10px;
 }
   
+.popupbox.is-active {
+    opacity: 1;
+}
+
+.popupbox-wrapper {
+    background-color: rgba(99,84,112,.95);
+    padding: 50px;    
+}
